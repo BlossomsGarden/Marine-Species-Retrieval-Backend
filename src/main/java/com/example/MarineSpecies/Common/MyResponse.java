@@ -1,10 +1,5 @@
 package com.example.MarineSpecies.Common;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.example.MarineSpecies.UserAndAdminLogin.Entity.Admin;
-import com.example.MarineSpecies.UserAndAdminLogin.Entity.User;
-import com.example.MarineSpecies.UserAndAdminLogin.Mapper.AdminMapper;
-import com.example.MarineSpecies.UserAndAdminLogin.Mapper.UserMapper;
 import lombok.Data;
 
 /**
