@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * DTO,除了MarineSpecies基本信息外，再注入image、kingdom、……
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2023-10-17
  */
 @Data

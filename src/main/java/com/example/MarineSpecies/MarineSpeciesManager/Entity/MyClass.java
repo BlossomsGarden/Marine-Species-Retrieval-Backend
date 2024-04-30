@@ -10,7 +10,7 @@ import lombok.Data;
  * my_class表实体类
  * 使用MyClass是为了避免关键字冲突
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2024-04-23
  */
 @Data

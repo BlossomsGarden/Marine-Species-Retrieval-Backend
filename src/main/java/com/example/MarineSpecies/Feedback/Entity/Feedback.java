@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * feedback表实体类
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2024-04-23
  */
 @Data
@@ -19,7 +19,9 @@ public class Feedback extends BaseEntity {
     Integer id;
     String title;
     String content;
-    Integer upload_id;
+    Integer uploadId;
+    //没时间实现回复了，弃置
     String reply;
-    Integer review_id;
+    //没时间实现回复了，弃置
+    Integer reviewId;
 }

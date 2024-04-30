@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * 阿里云OSS库调用封装类
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2024-04-11
  */
 @Slf4j

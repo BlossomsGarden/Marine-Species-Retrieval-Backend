@@ -3,9 +3,9 @@
 ############################################################
 spring:
   datasource:
-    url: jdbc:mysql://139.196.197.42:3489/marine_species?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    username: root
-    password: '@Violetforever25'
+    url: jdbc:mysql://************/marine_species?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: ************
+    password: ************
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       max-lifetime=120000

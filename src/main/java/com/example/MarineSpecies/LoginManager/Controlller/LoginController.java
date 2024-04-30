@@ -2,7 +2,7 @@ package com.example.MarineSpecies.LoginManager.Controlller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.MarineSpecies.Common.MyResponse;
-import com.example.MarineSpecies.Common.SignedIn;
+import com.example.MarineSpecies.LoginManager.Entity.DTO.SignedIn;
 import com.example.MarineSpecies.LoginManager.Entity.MenuPermission;
 import com.example.MarineSpecies.LoginManager.Entity.User;
 import com.example.MarineSpecies.LoginManager.Mapper.UserMapper;
@@ -10,7 +10,6 @@ import com.example.MarineSpecies.LoginManager.Entity.Admin;
 import com.example.MarineSpecies.LoginManager.Mapper.AdminMapper;
 import com.example.MarineSpecies.LoginManager.Mapper.MenuPermissionMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +19,7 @@ import java.util.List;
 /**
  * 用户登录及目录权限管理方面的Controller类
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2024-03-23
  */
 @RestController
@@ -44,56 +43,9 @@ public class LoginController {
     public MyResponse<List<MenuPermission>> getUserMenuPermission(@SessionAttribute("signedIn") SignedIn signedIn) {
         LambdaQueryWrapper<MenuPermission> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper
-                .eq(MenuPermission::getAdmin, signedIn.getAdmin())
-                .eq(MenuPermission::getOperatorId, signedIn.getOperatorId());
+                .eq(MenuPermission::getOrganizationId, signedIn.getOrganizationId())
+                .eq(MenuPermission::getDeleted,false);
         return MyResponse.ok(menuPermissionMapper.selectList(lambdaQueryWrapper));
-    }
-
-    /**
-     * 修改个人信息函数
-     *
-     * @param orgSignedIn session 参数，查找是谁发的
-     * @param newSignedIn 传入的修改后的信息，更新到库里去，不要修改的字段是null
-     */
-    @PostMapping("editInfo")
-    public MyResponse<String> editInfo(@RequestBody SignedIn newSignedIn , @SessionAttribute("signedIn") SignedIn orgSignedIn){
-        if(orgSignedIn.getAdmin()==true){
-            //修改管理员信息
-            LambdaQueryWrapper<Admin> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-            lambdaQueryWrapper.eq(Admin::getId, orgSignedIn.getOperatorId());
-            Admin thisAdmin=adminMapper.selectOne(lambdaQueryWrapper);
-
-            if(newSignedIn.getName()!=null && newSignedIn.getName().length()>0){
-                //昵称不允许为空
-                thisAdmin.setName(newSignedIn.getName());
-            }
-            thisAdmin.setEmail(newSignedIn.getEmail());
-            thisAdmin.setDescription(newSignedIn.getDescription());
-            thisAdmin.setAvatarUrl(newSignedIn.getAvatarUrl());
-            adminMapper.updateById(thisAdmin);
-
-            //todo:管理员的sessionAttribute没有被更新
-
-        }
-        else {
-            //修改用户信息
-            LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-            lambdaQueryWrapper.eq(User::getId, orgSignedIn.getOperatorId());
-            User thisUser=userMapper.selectOne(lambdaQueryWrapper);
-
-            if(newSignedIn.getName()!=null && newSignedIn.getName().length()>0) {
-                //昵称不允许为空
-                thisUser.setName(newSignedIn.getName());
-            }
-            thisUser.setEmail(newSignedIn.getEmail());
-            thisUser.setDescription(newSignedIn.getDescription());
-            thisUser.setAvatarUrl(newSignedIn.getAvatarUrl());
-            userMapper.updateById(thisUser);
-
-            //todo:用户的sessionAttribute没有被更新
-
-        }
-        return MyResponse.ok("已成功修改");
     }
 
 
@@ -181,7 +133,6 @@ public class LoginController {
     }
 
 
-
     /**
      * 用户登录函数，在里面注入AttributeSession参数
      * 之后若不带着"user"身份，将报错400无法发送请求
@@ -203,8 +154,8 @@ public class LoginController {
         User thisUser = userMapper.selectOne(lambdaQueryWrapper);
 
         if(thisUser==null){
-            System.out.println("未找到此用户！");
-            return MyResponse.error(user,"未找到此用户！");
+            System.out.println("未找到此用户或密码错误！");
+            return MyResponse.error(user,"未找到此用户或密码错误！");
         }
 
         log.info("用户正在登录：{}", thisUser);
@@ -225,6 +176,5 @@ public class LoginController {
 
         return MyResponse.ok(thisUser);
     }
-
 
 }

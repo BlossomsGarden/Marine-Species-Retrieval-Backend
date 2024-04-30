@@ -9,7 +9,7 @@ import lombok.Data;
 /**
  * user 表实体类
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2024-03-23
  */
 @Data

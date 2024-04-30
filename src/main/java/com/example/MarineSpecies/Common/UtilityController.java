@@ -1,5 +1,6 @@
 package com.example.MarineSpecies.Common;
 
+import com.example.MarineSpecies.LoginManager.Entity.DTO.SignedIn;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 一些常用的共享接口
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2024-04-11
  */
 @RestController

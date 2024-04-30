@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * menu_permission 表实体类
  *
- * @author 2152189 汪林辉
+ * @author ************
  * @since 2023-03-23
  */
 @Data
